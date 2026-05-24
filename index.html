@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chess Hack Simulator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: #00ff99;
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(to right, #020202, #121212);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #00ff99;
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #00ffcc;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    nav a {
+      color: #00ffcc;
+      margin-left: 2rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff0055;
+    }
+
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(#000000, #0f0f0f);
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px #00ff99;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      line-height: 1.6;
+      color: #cccccc;
+      margin-bottom: 2rem;
+    }
+
+    .start-btn {
+      background-color: #00ff99;
+      border: none;
+      color: black;
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+
+    .start-btn:hover {
+      background-color: #ff0044;
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 0 10px #ff0044;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99, 0 0 15px #00ff99;
+      }
+      to {
+        text-shadow: 0 0 20px #00ff99, 0 0 30px #00ff99, 0 0 40px #00ff99;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Chess Hack Simulator</h1>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="#">Modes</a>
+      <a href="#">Terminal</a>
+      <a href="#">Simulate</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Hack the Board. Rule the Game.</h2>
+    <p>Welcome to the Chess Hack Simulator. Choose your mode, bend the rules, and simulate impossible chess tactics with power at your fingertips.</p>
+    <button class="start-btn" onclick="startSimulation()">Start Simulation</button>
+  </section>
+
+  <script>
+    function startSimulation() {
+      alert("Simulation Booting Up...\n[Loading Next Sequence]");
+    }
+  </script>
+  <!-- Glitch Background Effect -->
+  <style>
+    .glitch-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background-image: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.05),
+        rgba(0, 255, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      animation: glitchShift 2s infinite linear;
+    }
+
+    @keyframes glitchShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100px; }
+    }
+  </style>
+  <div class="glitch-bg"></div>
+
+  <!-- Hacker Terminal -->
+  <section style="padding: 2rem; background-color: #0a0a0a; border-top: 2px solid #00ff99;">
+    <h2 style="color: #00ff99; font-size: 1.8rem; margin-bottom: 1rem;">🖥️ Hacker Terminal</h2>
+    <div style="background: black; padding: 1rem; border: 2px solid #00ffcc; height: 200px; overflow-y: auto; font-family: monospace;" id="terminal">
+      > booting system...<br>
+      > injecting pawn AI override...<br>
+      > firewall bypass [✓]<br>
+      > loading hacks...<br>
+    </div>
+    <input
+      type="text"
+      id="terminalInput"
+      placeholder="Type a fake command (e.g. inject bishop)..."
+      style="width: 100%; padding: 0.7rem; margin-top: 1rem; background: #111; color: #0f0; border: none; font-family: monospace;"
+      onkeydown="if(event.key === 'Enter'){runFakeCommand();}"
+    />
+    <script>
+      function runFakeCommand() {
+        const input = document.getElementById("terminalInput");
+        const terminal = document.getElementById("terminal");
+        if (input.value.trim() !== "") {
+          terminal.innerHTML += `> ${input.value}<br>`;
+          terminal.scrollTop = terminal.scrollHeight;
+          input.value = "";
+        }
+      }
+    </script>
+  </section>
+
+  <!-- Chess UI Section -->
+  <section style="display: flex; flex-wrap: wrap; padding: 2rem; gap: 2rem; background-color: #0f0f0f; border-top: 2px solid #00ff99;">
+    <!-- Chess Board -->
+    <div id="chessBoard" style="width: 400px; height: 400px; background: #1a1a1a; border: 4px solid #00ffcc; box-shadow: 0 0 15px #00ffcc;"></div>
+
+    <!-- Hack Tools Panel -->
+    <div style="flex: 1; min-width: 300px;">
+      <h2 style="color: #00ff99;">🧪 Hack Tools</h2>
+      <ul style="list-style: none; padding-left: 0; margin-top: 1rem;">
+        <li><button class="hack-btn" onclick="alert('Enabled Reveal Opponent Moves')">👁️ Reveal Opponent Moves</button></li>
+        <li><button class="hack-btn" onclick="alert('Forced Checkmate Activated')">💣 Force Checkmate</button></li>
+        <li><button class="hack-btn" onclick="alert('Switched King with Queen')">♛ Swap King/Queen</button></li>
+        <li><button class="hack-btn" onclick="alert('Opponent Timer Frozen')">🕒 Freeze Time</button></li>
+        <li><button class="hack-btn" onclick="alert('Added Extra Knight')">🐴 Add Extra Knight</button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Chessboard.js + Chess.js Setup -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.12.0/chess.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/js/chessboard.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard.js/1.0.0/css/chessboard.min.css"/>
+
+  <script>
+    const game = new Chess();
+    const board = Chessboard('chessBoard', {
+      draggable: true,
+      position: 'start',
+      onDrop: function(source, target) {
+        const move = game.move({ from: source, to: target, promotion: 'q' });
+        if (move === null) return 'snapback';
+      }
+    });
+  </script>
+
+  <style>
+    .hack-btn {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 0.8rem;
+      background: #121212;
+      color: #00ffcc;
+      border: 2px solid #00ffcc;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hack-btn:hover {
+      background: #ff0033;
+      color: white;
+      border-color: #ff0033;
+      box-shadow: 0 0 10px #ff0033;
+    }
+  </style>
+<!-- Game Mode Switcher Section -->
+<section style="padding: 2rem; background-color: #0a0a0a; border-top: 2px solid #00ff99;">
+  <h2 style="color: #00ffcc;">🎮 Select Game Mode</h2>
+  <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+    <button class="mode-btn" onclick="switchMode('AI')">🤖 Hacker vs AI</button>
+    <button class="mode-btn" onclick="switchMode('Player')">👥 Hacker vs Hacker</button>
+    <button class="mode-btn" onclick="switchMode('Duel')">💻 Hack Duel</button>
+  </div>
+  <p id="mode-status" style="color: #ccc; margin-top: 1rem;">Current Mode: <strong>None</strong></p>
+</section>
+
+<script>
+  function switchMode(mode) {
+    document.getElementById("mode-status").innerHTML = `Current Mode: <strong>${mode}</strong>`;
+    playSound('switch');
+  }
+</script>
+
+<style>
+  .mode-btn {
+    background: #111;
+    color: #00ff99;
+    border: 2px solid #00ff99;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .mode-btn:hover {
+    background: #ff0055;
+    color: white;
+    border-color: #ff0055;
+    box-shadow: 0 0 10px #ff0055;
+  }
+</style>
+
+<!-- Simulation Dashboard -->
+<section style="padding: 2rem; background-color: #0f0f0f; border-top: 2px solid #00ffcc;">
+  <h2 style="color: #00ffcc;">📊 Simulation Dashboard</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin-top: 1rem;">
+    <div class="meter-box">
+      <p>CPU Override</p>
+      <div class="meter-bar" style="width: 90%"></div>
+    </div>
+    <div class="meter-box">
+      <p>Firewall Level</p>
+      <div class="meter-bar" style="width: 60%"></div>
+    </div>
+    <div class="meter-box">
+      <p>Logic Engine</p>
+      <div class="meter-bar" style="width: 75%"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .meter-box {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .meter-box p {
+    color: #00ff99;
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .meter-bar {
+    height: 15px;
+    background: linear-gradient(to right, #00ffcc, #00ff66);
+    box-shadow: 0 0 8px #00ff99;
+  }
+</style>
+
+<!-- Sound Effects -->
+<audio id="sound-switch" src="https://freesound.org/data/previews/456/456135_5121236-lq.mp3"></audio>
+<audio id="sound-click" src="https://freesound.org/data/previews/250/250629_4486188-lq.mp3"></audio>
+
+<script>
+  function playSound(type) {
+    const audio = document.getElementById("sound-" + type);
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+  }
+
+  // Play on click for hack buttons
+  const hackButtons = document.querySelectorAll(".hack-btn, .mode-btn");
+  hackButtons.forEach(btn => {
+    btn.addEventListener("click", () => playSound("click"));
+  });
+</script>
+<!-- AI Brain Scan Simulation -->
+<section style="padding: 2rem; background-color: #0a0a0a; border-top: 2px solid #00ffcc;">
+  <h2 style="color: #00ffcc;">🧠 AI Brain Scan</h2>
+  <div style="background: #111; padding: 1rem; color: #00ff99; font-family: monospace; line-height: 1.6;">
+    Scanning chess engine memory core...<br>
+    >> logic-tree: 98.6% integrity<br>
+    >> counter-move patterns: rerouted<br>
+    >> threat analysis: predictive grid enabled<br>
+    >> priority override level: <strong style="color: red;">ROOT</strong><br>
+    >> decision matrix: <span id="matrixOutput"></span>
+  </div>
+</section>
+
+<script>
+  const matrixText = "Injecting probability heuristics > recalculating > mapping illegal patterns...";
+  let matrixIndex = 0;
+  function typeMatrix() {
+    const out = document.getElementById("matrixOutput");
+    if (matrixIndex < matrixText.length) {
+      out.innerHTML += matrixText.charAt(matrixIndex);
+      matrixIndex++;
+      setTimeout(typeMatrix, 30);
+    }
+  }
+  window.addEventListener("load", typeMatrix);
+</script>
+
+<!-- Firewall Login Puzzle -->
+<section style="padding: 2rem; background: #111; border-top: 2px solid #00ffcc;">
+  <h2 style="color: #00ffcc;">🔐 Firewall Access Challenge</h2>
+  <p style="color: #aaa;">Solve the access code puzzle to simulate entry to restricted chess kernel:</p>
+  <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+    <input type="text" id="firewallCode" placeholder="Enter access code..." style="padding: 0.7rem; background: #000; color: #0f0; border: 2px solid #00ff99; font-family: monospace;">
+    <button onclick="verifyFirewall()" style="padding: 0.7rem; background: #00ff66; border: none; font-weight: bold; cursor: pointer;">Bypass</button>
+  </div>
+  <p id="firewallStatus" style="color: red; margin-top: 0.8rem;"></p>
+
+  <script>
+    function verifyFirewall() {
+      const input = document.getElementById("firewallCode").value.trim();
+      const output = document.getElementById("firewallStatus");
+      if (input === "bishopRoot42") {
+        output.innerHTML = "✅ Access Granted. Welcome Agent.";
+        output.style.color = "#00ff99";
+        playSound("switch");
+      } else {
+        output.innerHTML = "❌ Incorrect code. Access denied.";
+        output.style.color = "red";
+      }
+    }
+  </script>
+</section>
+
+<!-- Command Help Expandable Panel -->
+<section style="padding: 2rem; background-color: #000; border-top: 2px solid #00ff99;">
+  <h2 style="color: #00ffcc;">📂 Command Help</h2>
+  <button onclick="toggleHelp()" style="background: #00ff99; color: black; border: none; padding: 0.6rem 1.2rem; margin-top: 1rem;">Toggle Help Panel</button>
+  <div id="helpPanel" style="display: none; margin-top: 1rem; color: #0f0; background: #111; padding: 1rem;">
+    <p><strong>inject bishop</strong> — Adds an extra bishop to your team.</p>
+    <p><strong>freeze timer</strong> — Freezes opponent's move timer.</p>
+    <p><strong>force mate</strong> — Instantly checks for a forced mate and executes it.</p>
+    <p><strong>reveal moves</strong> — Shows all future opponent moves.</p>
+    <p><strong>hack mode on</strong> — Enables all tools and access overrides.</p>
+  </div>
+  <script>
+    function toggleHelp() {
+      const panel = document.getElementById("helpPanel");
+      panel.style.display = (panel.style.display === "none") ? "block" : "none";
+    }
+  </script>
+</section>
+
+<!-- Data Stream Loader Animation -->
+<section style="padding: 2rem; background: #0a0a0a; border-top: 2px solid #00ffcc;">
+  <h2 style="color: #00ffcc;">🌌 Initializing Quantum Grid...</h2>
+  <pre id="loaderText" style="font-family: monospace; color: #00ff99; padding-top: 1rem;"></pre>
+
+  <script>
+    const streamData = [
+      ">> Initializing Chess AI Injection Protocol...",
+      ">> Bypassing quantum firewall...",
+      ">> Establishing knight socket stream...",
+      ">> Matrix sync complete...",
+      ">> Ready to deploy quantum fork..."
+    ];
+    let loaderIndex = 0;
+    function streamLoader() {
+      if (loaderIndex < streamData.length) {
+        document.getElementById("loaderText").innerHTML += streamData[loaderIndex] + "\n";
+        loaderIndex++;
+        setTimeout(streamLoader, 1000);
+      }
+    }
+    window.addEventListener("load", streamLoader);
+  </script>
+</section>
+<!-- Glitch Loading Screen -->
+<div id="loadingScreen" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: black;
+  color: #00ff99;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 9999;
+  transition: opacity 1s ease;
+">
+  <div id="glitchLoadText">[ INJECTING ENGINE CORE █▒▒▒▒▒▒▒▒▒▒ ]</div>
+</div>
+
+<script>
+  let glitchStep = 0;
+  const glitchSteps = [
+    "[ INJECTING ENGINE CORE █▒▒▒▒▒▒▒▒▒▒ ]",
+    "[ INJECTING ENGINE CORE ██▒▒▒▒▒▒▒▒ ]",
+    "[ INJECTING ENGINE CORE ███▒▒▒▒▒▒▒ ]",
+    "[ INJECTING ENGINE CORE █████▒▒▒▒▒ ]",
+    "[ INJECTING ENGINE CORE ██████████ ]",
+    "[ SYSTEM READY ✔ ]"
+  ];
+
+  function animateGlitchLoading() {
+    if (glitchStep < glitchSteps.length) {
+      document.getElementById("glitchLoadText").innerText = glitchSteps[glitchStep];
+      glitchStep++;
+      setTimeout(animateGlitchLoading, 600);
+    } else {
+      document.getElementById("loadingScreen").style.opacity = "0";
+      setTimeout(() => document.getElementById("loadingScreen").style.display = "none", 1000);
+    }
+  }
+
+  window.addEventListener("load", animateGlitchLoading);
+</script>
+
+<!-- Footer Section -->
+<footer style="background: #000; padding: 2rem; text-align: center; color: #00ffcc; border-top: 2px solid #00ff99;">
+  <p>🧠 Chess Hack Simulator — Prototype © 2025</p>
+  <p style="font-size: 0.85rem; color: #999;">This is a fictional simulator. No actual hacking is performed. Created for educational and design purposes only.</p>
+</footer>
+
+<!-- Secret Easter Egg Command -->
+<script>
+  const secretCommand = "unlock godmode";
+  const termInput = document.getElementById("terminalInput");
+
+  termInput.addEventListener("input", () => {
+    if (termInput.value.trim().toLowerCase() === secretCommand) {
+      document.getElementById("terminal").innerHTML +=
+        "> UNLOCKING GODMODE... <br> > You now control all pieces. No rules apply. ♛<br>";
+      termInput.value = "";
+      playSound("switch");
+    }
+  });
+</script>
+
+<!-- Final Polish: Flicker + Neon Scrollbar -->
+<style>
+  /* Neon Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #00ff99;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ff99;
+  }
+
+  /* Flicker Animation */
+  @keyframes flickerText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  h2, h1 {
+    animation: flickerText 1.5s infinite ease-in-out;
+  }
+
+  /* Link Glow */
+  a {
+    color: #00ffff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #fff;
+    text-shadow: 0 0 8px #00ffff;
+  }
+</style>
+
+</body>
+</html>
